@@ -115,6 +115,9 @@ set ffs=unix,dos,mac
 highlight OverLength ctermbg=black ctermfg=yellow guibg=#592929
 match OverLength /\%81v.\+/
 
+" Highlight trailing whitespace
+highlight TrailingWhiteSpace ctermbg=DarkGray
+2match TrailingWhiteSpace /\s\+$/
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
