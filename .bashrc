@@ -119,22 +119,9 @@ fi
 ###
 ### CUSTOMIZATIONS
 ###
-
 PS1='\u $ '
-
 export EDITOR=/usr/bin/vim
-
 alias dc='cd'
-alias gl='cd ~/Documents/GreenLancer'
-
-alias glapplications='gl; cd applications'
-
-alias glackages='glapplications; cd packages'
-
-alias glapplication='glapplications; cd glapp/app'
-alias glagrant='glapplication; cd ../ansible-playbook-glapp'
-alias glagrant-up="glagrant; vagrant up"
-alias glagrant-ssh="glagrant; vagrant ssh"
 
 export NVM_DIR="/home/pete/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
