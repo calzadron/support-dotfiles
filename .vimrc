@@ -109,9 +109,9 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-" Highlight characters over 80
-highlight OverLength ctermbg=black ctermfg=yellow guibg=#592929
-match OverLength /\%81v.\+/
+" Highlight characters over 90
+highlight OverLength ctermbg=DarkGray
+match OverLength /\%91v.\+/
 
 " Highlight trailing whitespace
 highlight TrailingWhiteSpace ctermbg=DarkGray
@@ -129,19 +129,21 @@ set noswapfile
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" https://superuser.com/questions/4511/delete-space-expanded-tab-in-vim-with-one-keystroke#answer-1104409
 " Use spaces instead of tabs
-"set expandtab
+set expandtab
 
 " Be smart when using tabs ;)
-set smarttab
+"set smarttab
 
 " 1 tab == 4 spaces
-set shiftwidth=4
+set shiftwidth=0
 set tabstop=4
+set softtabstop=-1
 
 " Linebreak on 120 characters
 set lbr
-set tw=120
+"set tw=120
 
 set ai "Auto indent
 set si "Smart indent
@@ -242,8 +244,8 @@ func! DeleteTrailingWS()
 	%s/\s\+$//ge
 	exe "normal `z"
 endfunc
-"autocmd BufWrite *.py :call DeleteTrailingWS()
-"autocmd BufWrite *.coffee :call DeleteTrailingWS()
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""t"
@@ -329,14 +331,25 @@ endfunction
 """""""""""""""""""""
 "" PATHOGEN PLUGINS "
 """""""""""""""""""""
+execute pathogen#infect()
 
-" START NERDTree if no files are specified
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+""" Syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_auto_jump = 1
+let g:syntastic_loc_list_height = 3
 
-" Close NERDTree if it's the only window left open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+let g:syntastic_python_checkers = ['flake8']
 
-" https://github.com/nathanaelkane/vim-indent-guides/issues/20
-"let g:indent_guides_exclude_filetypes = ['nerdtree']
-" END NERDTree
+let g:syntastic_php_checkers=['php', 'phpcs']
+
+let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
+let g:syntastic_mode_map = {
+    \ "mode": "passive",
+    \ "active_filetypes": ["python", "php"],
+    \ "passive_filetypes": [] }
+
+
+let html_no_rendering = 1
