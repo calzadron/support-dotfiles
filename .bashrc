@@ -119,7 +119,7 @@ fi
 ###
 ### CUSTOMIZATIONS
 ###
-PS1='\u $ '
+export PS1='\u $ '
 export EDITOR=/usr/bin/vim
 alias dc='cd'
 
